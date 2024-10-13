@@ -1,0 +1,26 @@
+.container {
+	max-width: 1000px;
+	margin-inline: auto;
+	padding-inline: 20px;
+}
+
+.alert {
+	color: red !important;
+}
+
+.btn {
+	background-color: $primary;
+	color: #fff;
+	border-radius: 100vw;
+	padding: 5px 20px;
+	letter-spacing: 1px;
+}
+
+.d-flex {
+	display: flex;
+	&--justify {
+		justify-content: space-between;
+	}
+}
+
+.gap1{gap:1em}.gap2{gap:2em}.gap3{gap:3em}.gap4{gap:4em}

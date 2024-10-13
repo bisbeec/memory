@@ -1,0 +1,220 @@
+@import 'variables';
+@import 'utilities';
+
+
+@mixin flexCenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	border: none;
+	cursor: pointer;
+}
+
+body {
+	font-family: "Mulish", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 400;
+  	font-style: normal;
+  	line-height: 1.5;
+  	@include flexCenter;
+  	height: 100vh;
+  	color: #333;
+  	@media screen and (max-width: $break) {
+  		display: block;
+  	}
+}
+
+header {
+	position: fixed;
+	top: 0; left: 0;
+	width: 100%;
+	margin-top: 1em;
+	@media screen and (max-width: $break) {
+  		position: static;
+  		margin-bottom: 4em;
+  		>.container {
+  			max-width: none;
+  			margin-inline: 0;
+  			padding-inline: 0;
+  		}
+  	}
+}
+
+.game-wrap {
+	@media screen and (max-width: $break) {
+		justify-content: center;
+	}
+	&:has(.game-over-message) {
+		.memory-game {
+			&::after {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
+	@media screen and (max-width: $break) {
+		> .d-flex {
+			flex-direction: column;
+		}
+	}
+}
+
+.memory-game, .game-info, .game-status {
+	width: 320px;
+}
+
+.memory-game {
+	position: relative;
+	aspect-ratio: 1/1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    @media screen and (max-width: $break) {
+    	gap: 25px;
+    }
+    .memory-card {
+    	width: 100%;
+	    height: 100%;
+	    background-color: $gray900;
+	    border-radius: 5px;
+	    @include flexCenter;
+	    font-size: 24px;
+	    color: #fff;
+	    border-radius: 50%;
+	    position: relative;
+	    transform: scale(1);
+	    transition: transform 0.3s;
+	    &:focus-visible{
+	    	outline: 3px solid $primary;
+	    }
+	    i {
+	    	font-size: 1.5em;
+	    }
+	    &.flipped {
+	    	background-color: $gray200;
+    		transform: scale(1.05);
+	    }
+	    &.matched {
+	    	background-color: $primary;
+    		cursor: default;
+	    }
+    }
+    &::after {
+    	content: "";
+    	position: absolute;
+		background: rgba(255,255,255,.5);
+		inset: -2%;
+		width: 104%;
+		height: 104%;
+		display: block;
+		backdrop-filter: blur(2px);
+		opacity: 0;
+		visibility: hidden;
+		transition: 1.5s opacity ease-in-out;
+    }
+}
+
+
+.game-info {
+	border-left: 1px solid #ccc;
+	padding-left: 2em;
+	@include flexCenter;
+	flex-direction: column;
+	gap: 1em;
+	position: relative;
+	@media screen and (max-width: $break) {
+		flex-direction: row;
+		padding-left: 0;
+		border-left: none;
+	}
+	.stat {
+		background-color: $gray100;
+		color: #777;
+		text-align: center;
+		@include flexCenter;
+		font-weight: 600;
+		width: 150px; aspect-ratio: 2/1;
+		font-size: .8rem;
+		border-radius: 5px;
+		span {
+			display: block;
+			font-weight: 900;
+			font-size: 1.2rem;
+			color: $gray900;
+		}
+	}
+	.game-status {
+	    text-align: center;
+	    align-self: end;
+	    min-height: 90px;
+	    padding-inline: 25px;
+	    position: absolute;
+	    top: 0; top: -35%;
+	    width: 100%;
+	    transform: scale(0);
+	    transition: 1s transform ease-in-out;
+	    .you-won-message {
+	    	background: rgba(green, .5);
+	    	padding: 10px;
+	    	h2 {
+	    		text-transform: uppercase;
+	    		color: #fff;
+	    		letter-spacing: 2px;
+	    	}
+
+	    }
+	    .game-over-message {
+	    	background: rgba(red, .5);
+	    	padding: 10px;
+	    }
+	    &:has(div) {
+	    	transform: scale(1);
+	    	@media screen and (max-width: $break) {
+	    		opacity: 1;
+	    	}
+	    }
+	    @media screen and (max-width: $break) {
+	    	transform: none !important;
+	    	transition-property: opacity;
+	    	opacity: 0;
+	    	>div {
+	    		position: absolute;
+		    	top: -400px;
+		    	height: 370px;
+		    	left: -10px;
+		    	width: calc(100% + 20px);
+		    	display: flex;
+		    	flex-direction: column;
+		    	justify-content: flex-end;
+		    	&::after {
+		    		content: "";
+		    		background: linear-gradient(rgba(red, .0), rgba(red, 1));
+		    		position: absolute;
+		    		width: 100%; height: 200px;
+		    		bottom: 0; left: 0;
+		    		filter: blur(10px);
+		    	}
+		    	* {
+		    		position: relative;
+		    		z-index: 1;
+		    	}
+		    	p {
+		    		margin-bottom: 3em;
+		    	}
+		    	&.you-won-message::after {
+		    		background: linear-gradient(rgba(green, .0), rgba(green, 1));
+		    	}
+	    	}
+	    }
+	}
+}
