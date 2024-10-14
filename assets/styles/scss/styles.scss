@@ -163,19 +163,16 @@ header {
 	    width: 100%;
 	    transform: scale(0);
 	    transition: 1s transform ease-in-out;
-	    .you-won-message {
-	    	background: rgba(green, .5);
+	    >div {
+	    	border: 2px solid red;
 	    	padding: 10px;
 	    	h2 {
 	    		text-transform: uppercase;
-	    		color: #fff;
-	    		letter-spacing: 2px;
+	    		letter-spacing: 1px;
 	    	}
-
-	    }
-	    .game-over-message {
-	    	background: rgba(red, .5);
-	    	padding: 10px;
+	    	&.you-won-message {
+	    		border-color: green;
+	    	}
 	    }
 	    &:has(div) {
 	    	transform: scale(1);
@@ -189,30 +186,16 @@ header {
 	    	opacity: 0;
 	    	>div {
 	    		position: absolute;
-		    	top: -400px;
-		    	height: 370px;
+		    	top: -120px;
 		    	left: -10px;
 		    	width: calc(100% + 20px);
 		    	display: flex;
 		    	flex-direction: column;
 		    	justify-content: flex-end;
-		    	&::after {
-		    		content: "";
-		    		background: linear-gradient(rgba(red, .0), rgba(red, 1));
-		    		position: absolute;
-		    		width: 100%; height: 200px;
-		    		bottom: 0; left: 0;
-		    		filter: blur(10px);
-		    	}
-		    	* {
-		    		position: relative;
-		    		z-index: 1;
-		    	}
-		    	p {
-		    		margin-bottom: 3em;
-		    	}
-		    	&.you-won-message::after {
-		    		background: linear-gradient(rgba(green, .0), rgba(green, 1));
+		    	background-color: red;
+		    	&.you-won-message {
+		    		background-color: green;
+		    		color: #fff;
 		    	}
 	    	}
 	    }

@@ -346,18 +346,16 @@ header {
   transition: 1s transform ease-in-out;
   transition: 1s transform ease-in-out, 1s -webkit-transform ease-in-out;
 }
-.game-info .game-status .you-won-message {
-  background: rgba(0, 128, 0, 0.5);
+.game-info .game-status > div {
+  border: 2px solid red;
   padding: 10px;
 }
-.game-info .game-status .you-won-message h2 {
+.game-info .game-status > div h2 {
   text-transform: uppercase;
-  color: #fff;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
-.game-info .game-status .game-over-message {
-  background: rgba(255, 0, 0, 0.5);
-  padding: 10px;
+.game-info .game-status > div.you-won-message {
+  border-color: green;
 }
 .game-info .game-status:has(div) {
   -webkit-transform: scale(1);
@@ -378,8 +376,7 @@ header {
   }
   .game-info .game-status > div {
     position: absolute;
-    top: -400px;
-    height: 370px;
+    top: -120px;
     left: -10px;
     width: calc(100% + 20px);
     display: -webkit-box;
@@ -392,28 +389,10 @@ header {
     -webkit-box-pack: end;
         -ms-flex-pack: end;
             justify-content: flex-end;
+    background-color: red;
   }
-  .game-info .game-status > div::after {
-    content: "";
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 0, 0, 0)), to(red));
-    background: linear-gradient(rgba(255, 0, 0, 0), red);
-    position: absolute;
-    width: 100%;
-    height: 200px;
-    bottom: 0;
-    left: 0;
-    -webkit-filter: blur(10px);
-            filter: blur(10px);
-  }
-  .game-info .game-status > div * {
-    position: relative;
-    z-index: 1;
-  }
-  .game-info .game-status > div p {
-    margin-bottom: 3em;
-  }
-  .game-info .game-status > div.you-won-message::after {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 128, 0, 0)), to(green));
-    background: linear-gradient(rgba(0, 128, 0, 0), green);
+  .game-info .game-status > div.you-won-message {
+    background-color: green;
+    color: #fff;
   }
 }
