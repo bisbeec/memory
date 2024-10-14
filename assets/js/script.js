@@ -175,7 +175,7 @@ function resetTimer() {
 
 // End the game after maximum incorrect guesses
 function endGame() {
-    gameStatus.innerHTML = '<div class="game-over-message"><h2>Game over</h2><p>You reached the maximum number of guesses.</p></div>';
+    gameStatus.innerHTML = '<div class="game-over-message"><h2>Game over</h2><p>You have no more guesses.</p></div>';
     disableAllCards();
     stopTimer();
 }
